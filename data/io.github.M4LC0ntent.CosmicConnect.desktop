@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Cosmic Connect
+Comment=Integrate your devices
+Icon=phone-symbolic
+Exec=cosmic-connect-applet
+Categories=CosmicApplet;
+NoDisplay=true
+Hidden=true
+X-CosmicApplet=true
+X-CosmicAppletAppId=io.github.M4LC0ntent.CosmicConnect

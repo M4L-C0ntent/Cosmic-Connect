@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=COSMIC Connect Settings
+GenericName=Device Synchronization
+Comment=Integrate your phone with your COSMIC desktop
+Icon=preferences-startup-applications-symbolic.svg
+Exec=cosmic-connect-settings %u
+Terminal=false
+Categories=Network;
+MimeType=x-scheme-handler/kdeconnect;
+StartupNotify=false
+X-KDE-Protocols=kdeconnect
+X-COSMIC-AppletId=io.github.M4LC0ntent.CosmicConnect

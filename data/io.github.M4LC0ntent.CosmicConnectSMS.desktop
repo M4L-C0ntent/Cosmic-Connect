@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Cosmic Connect SMS
+Comment=Send and Receive SMS Messages
+Icon=chat-symbolic
+Exec=cosmic-connect-sms
+Categories=Settings;Network;
+NoDisplay=true
+Hidden=true
+Keywords=phone;tablet;sync;kde;connect;
+StartupNotify=true

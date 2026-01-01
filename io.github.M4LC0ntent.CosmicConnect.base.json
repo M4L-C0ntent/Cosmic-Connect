@@ -1,0 +1,73 @@
+{
+  "app-id": "io.github.M4LC0ntent.CosmicConnect",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "24.08",
+  "sdk": "org.freedesktop.Sdk",
+  "sdk-extensions": [
+    "org.freedesktop.Sdk.Extension.rust-stable"
+  ],
+  "command": "cosmic-connect-applet",
+  "finish-args": [
+    "--socket=wayland",
+    "--socket=fallback-x11",
+    "--share=ipc",
+    "--socket=session-bus",
+    "--socket=system-bus",
+    "--share=network",
+    "--filesystem=home",
+    "--filesystem=xdg-download",
+    "--filesystem=xdg-run/kdeconnect:ro",
+    "--filesystem=xdg-config/kdeconnect:rw",
+    "--filesystem=xdg-data/kdeconnect:rw",
+    "--filesystem=/tmp:rw",
+    "--device=all",
+    "--talk-name=org.kde.kdeconnect",
+    "--talk-name=org.kde.kdeconnect.daemon",
+    "--talk-name=org.kde.kdeconnect.device.*",
+    "--talk-name=org.freedesktop.portal.Desktop",
+    "--talk-name=org.freedesktop.portal.FileChooser",
+    "--talk-name=org.freedesktop.Notifications",
+    "--talk-name=org.freedesktop.secrets",
+    "--talk-name=org.gtk.vfs.*",
+    "--system-talk-name=org.freedesktop.NetworkManager"
+  ],
+  "build-options": {
+    "append-path": "/usr/lib/sdk/rust-stable/bin",
+    "env": {
+      "CARGO_HOME": "/run/build/cosmic-connect-applet/cargo",
+      "RUSTFLAGS": "-C link-arg=-Wl,-z,relro,-z,now"
+    }
+  },
+  "modules": [
+    {
+      "name": "cosmic-connect-applet",
+      "buildsystem": "simple",
+      "build-options": {
+        "env": {
+          "CARGO_HOME": "/run/build/cosmic-connect-applet/cargo"
+        }
+      },
+      "build-commands": [
+        "cargo --offline fetch --manifest-path Cargo.toml --verbose",
+        "cargo --offline build --release --verbose",
+        "install -Dm755 target/release/cosmic-connect-applet /app/bin/cosmic-connect-applet",
+        "install -Dm755 target/release/cosmic-connect-settings /app/bin/cosmic-connect-settings",
+        "install -Dm755 target/release/cosmic-connect-sms /app/bin/cosmic-connect-sms",
+        "mkdir -p /app/share/applications",
+        "install -Dm644 data/io.github.M4LC0ntent.CosmicConnect.desktop /app/share/applications/io.github.M4LC0ntent.CosmicConnect.desktop",
+        "install -Dm644 data/io.github.M4LC0ntent.CosmicConnectSettings.desktop /app/share/applications/io.github.M4LC0ntent.CosmicConnectSettings.desktop",
+        "install -Dm644 data/io.github.M4LC0ntent.CosmicConnectSMS.desktop /app/share/applications/io.github.M4LC0ntent.CosmicConnectSMS.desktop",
+        "mkdir -p /app/share/cosmic-connect",
+        "install -Dm755 scripts/disable_kde_notifications.sh /app/share/cosmic-connect/disable_kde_notifications.sh",
+        "install -Dm755 scripts/show_kde_notifications.sh /app/share/cosmic-connect/show_kde_notifications.sh"
+      ],
+      "sources": [
+        {
+          "type": "dir",
+          "path": "."
+        }
+        
+      ]
+    }
+  ]
+}
